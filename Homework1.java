@@ -50,7 +50,7 @@ public class Homework1 {
     //Годы 2100, 2200 и 2300 - не високосные.
     //за правильный ответ - 0.5б
     public static boolean isLeapYear(int year) {
-        return year % 4 == 0 && year % 100 != 0;
+        return year % 400 == 0 || year % 4 == 0 && year % 100 != 0;
     }
 
     //здесь вам нужно будет использовать результат прошлой задачи
