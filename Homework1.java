@@ -1,3 +1,7 @@
+package Homework;
+
+import java.util.Arrays;
+
 public class Homework1 {
 
     //ВАЖНО!
@@ -7,22 +11,35 @@ public class Homework1 {
     //0.5б - если посчитаете в цикле
     //1б - если посчитаете рекурсией
     public static int fact(int n){
-        return n;
+        if (n == 2) return n;
+        return fact(n - 1) * n;
     }
 
     //вывести таблицу умножения на экран - 1б
     //подсказка - использовать двойной for
     public static void table(){
-        //Ваше решение здесь
+        int t = 10;
+        System.out.print("  ");
+        for (int i = 1; i <= t; i++) {
+            if (i > 1) System.out.printf("%2d", i);
+            for (int j = 1; j <= t; j++) {
+                System.out.printf("%5d", i * j);
+            }
+            System.out.println("");
+        }
     }
 
     //посчитать сумму цифр числа
     //можно посчитать для трехзначного - 0.5б
     //для любого числа - 1б
     //подсказка - в случае для любого числа используйте while
-    public static int sum(int n){
-        //Ваше решение здесь
-        return n;
+    public static int sum(int n) {
+        int sum = 0;
+        while (n > 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
     }
 
     //определить, является ли год високосным
@@ -33,34 +50,35 @@ public class Homework1 {
     //Годы 2100, 2200 и 2300 - не високосные.
     //за правильный ответ - 0.5б
     public static boolean isLeapYear(int year) {
-        //Ваше решение здесь
-        return true;
+        return year % 400 == 0 || year % 4 == 0 && year % 100 != 0;
     }
 
     //здесь вам нужно будет использовать результат прошлой задачи
     //и вывести, сколько дней в году
     //правильный ответ - 0.5б
     public static int daysInYear(int year) {
-        if (isLeapYear(year)){
-            //
-        } else {
-            //
-        }
-        return 0;
+        return isLeapYear(year) ? 366 : 365;
     }
 
     //определить номер дня недели по строке
     //например: Понедельник - 1
     //правильный ответ - 1б
-    public static int dayOfTheWeek(String n){
-        //Ваше решение здесь
-        return 0;
+    public static String dayOfTheWeek(String n){
+        String[] mas = {"Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресение"};
+        for (int i = 0; i < 7; i++) {
+            if (mas[i].equals(n)) return i + 1 + "";
+        }
+        return "Нет такого дня недели :)";
     }
 
     //вывести массив на экран в виде: [1, 5, 3, 7, 10, 2, 5]
     //правильное решение - 0.5б
     public static void printArray(int[] array){
-        //Ваше решение здесь
+        if (array.length > 0) System.out.print("[" + array[0]);
+        for (int i = 1; i < array.length; i++) {
+            System.out.print(", " + array[i]);
+        }
+        System.out.println("]");
     }
 
     //вывести двойной массив на экран в виде:
@@ -69,7 +87,9 @@ public class Homework1 {
     // ...
     //правильное решение - 0.5б
     public static void printArray(int[][] array){
-        //Ваше решение здесь
+        for (int i = 0; i < array.length; i++) {
+            printArray(array[i]);
+        }
     }
 
     //отсортировать одномерный массив в порядке возрастания
@@ -77,7 +97,17 @@ public class Homework1 {
     //метод пузырька (один из самых простых для понимания)
     //правильный ответ - 1б
     public static int[] sort(int[] array){
-        //Ваше решение здесь
+//        int k;
+//        for (int i = 0; i < array.length - 1; i++) {
+//            for (int j = i + 1; j < array.length; j++) {
+//                if (array[j] < array[i]) {
+//                    k = array[i];
+//                    array[i] = array[j];
+//                    array[j] = k;
+//                }
+//            }
+//        }
+        Arrays.sort(array);
         return array;
     }
 
@@ -85,26 +115,26 @@ public class Homework1 {
     //здесь можете тестировать свои решения
     public static void main(String[] args){
         System.out.println("Факториал:");
-        System.out.println(fact(5));
+        System.out.println(fact(10));
 
         System.out.println("Таблица умножения:");
         table();
 
         System.out.println("Сумма цифр числа:");
-        System.out.println(sum(12345));
+        System.out.println(sum(123456));
 
         System.out.println("Дней в году:");
-        System.out.println(daysInYear(2019));
+        System.out.println(daysInYear(2000));
 
         System.out.println("День недели:");
-        System.out.println(dayOfTheWeek("Понедельник"));
+        System.out.println(dayOfTheWeek("Воскресенье"));
 
-        int[] array1D = {1,5,3,7,10,2,5};
+        int[] array1D = {500, 1,5,3,7,10,2,5};
         System.out.println("Вывод отсортированного массива:");
         printArray(sort(array1D));
 
         System.out.println("Вывод двумерного массива:");
-        int[][] array2D = {{1,5,3,7,10,2,5}, {1,5,3,7,10,2,5}};
+        int[][] array2D = {{1,5,3,7,10,2,5}, {19,50,39,70,109,20,59}};
         printArray(array2D);
     }
 }
