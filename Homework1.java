@@ -1,5 +1,3 @@
-package Homework;
-
 import java.util.Arrays;
 
 public class Homework1 {
