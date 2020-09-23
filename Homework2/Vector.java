@@ -9,8 +9,31 @@ public class Vector {
         z = inputZ;
     }
 
-    public void printVector() {
-        System.out.println("(" + x + ", " + y + ", " + z + ")" + "\r\n");
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector vector = (Vector) o;
+        double eps = 0.0001; //критерий точности
+        return Math.abs(x - vector.x) < eps && Math.abs(y - vector.y) < eps && Math.abs(z - vector.z) < eps;
+    }
+
+    public int hashCode() {
+        int newX = (int) (x * 1000);
+        int newY = (int) (y * 1000);
+        int newZ = (int) (z * 1000);
+
+        return newX * 10000 + newY * 100 + newZ; //Позволяет закодировать куб с ребром 100 без коллизий
+    }
+    /*  На случай, я неправильно написала собственный хеш...
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, z);
+    }
+     */
+
+    public String toString() {
+        return "(" + x + ", " + y + ", " + z + ")" + "\r\n";
     }
 
     // Длина вектора. Корень из суммы квадратов
