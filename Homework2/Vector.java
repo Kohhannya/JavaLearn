@@ -1,7 +1,9 @@
 package Homework2;
 
+import java.util.Scanner;
+
 public class Vector {
-    double x, y, z;
+    private double x, y, z;
 
     public Vector(double inputX, double inputY, double inputZ) {
         x = inputX;
@@ -37,17 +39,17 @@ public class Vector {
     }
 
     // Длина вектора. Корень из суммы квадратов
-    double length(){
+    public double length(){
         return Math.sqrt(x * x + y * y + z * z);
     }
 
     // метод, вычисляющий скалярное произведение
-    double scalarProduct(Vector vector){
+    public double scalarProduct(Vector vector){
         return x * vector.x + y * vector.y + z * vector.z;
     }
 
     // метод, вычисляющий векторное произведение
-    Vector crossProduct(Vector vector){
+    public Vector crossProduct(Vector vector){
         double newX = y * vector.z - z * vector.y;
         double newY = z * vector.x - x * vector.z;
         double newZ = x * vector.y - y * vector.x;
@@ -55,17 +57,43 @@ public class Vector {
     }
 
     // Косинус между двумя векторами
-    double cos(Vector vector){
+    public double cos(Vector vector){
         return this.scalarProduct(vector) / this.length() / vector.length();
     }
 
     // Сумма двух векторов
-    Vector add(Vector vector){
+    public Vector add(Vector vector){
         return new Vector(x + vector.x, y + vector.y, z + vector.z);
     }
 
     // Разность двух веkторов
-    Vector subtract(Vector vector){
+    public Vector subtract(Vector vector){
         return new Vector(x - vector.x, y - vector.y, z - vector.z);
+    }
+
+    public static void main(String[] args) {
+        Scanner io = new Scanner(System.in);
+
+        Vector a = new Vector(io.nextDouble(), io.nextDouble(), io.nextDouble());
+        Vector b = new Vector(io.nextDouble(), io.nextDouble(), io.nextDouble());
+
+        System.out.println("Задача 1: Класс вектор\r\n");
+        System.out.println("Длина а = " + a.length());
+        System.out.println("Длина b = " + b.length());
+
+        System.out.println("(a, b) = " + a.scalarProduct(b));
+
+        System.out.println("a x b = " + a.crossProduct(b).toString());
+
+        System.out.println("cos угла между a и b = " + a.cos(b));
+
+        System.out.println("a + b = " + a.add(b).toString());
+
+        System.out.println("a - b = " + a.subtract(b).toString());
+
+        System.out.println("Хеш а: " + a.hashCode());
+        System.out.println("Хеш b: " + b.hashCode());
+
+        System.out.println("Результат equals: " + a.equals(b));
     }
 }
