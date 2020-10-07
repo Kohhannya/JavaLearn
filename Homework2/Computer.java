@@ -1,19 +1,23 @@
 package Homework2;
 
+import Homework3.*;
+
 import java.util.ArrayList;
 
 public interface Computer {
-    String turnOn();
+    String turnOn(int v) throws ComputerTurnOnException;
 
-    String turnOff();
+    String turnOff() throws ComputerTurnOffException;
 
-    String connect();
+    String connect(boolean wifi) throws ComputerConnectionError;
 }
 
 abstract class ComputerImpl implements Computer {
 
     String maker;
     String model;
+    int voltage;
+    boolean isOn = false;
 
     ArrayList<Component> components = new ArrayList<>();
 
@@ -27,16 +31,32 @@ abstract class ComputerImpl implements Computer {
 
     //так мы избавляемся от дублирующего кода
     //в дальнейшем, все что нам нужно - переопределить метод toString
-    public String turnOn() {
-        return getClass().getSimpleName() + " " + toString() + "has turned on";
+    public String turnOn(int v) throws ComputerTurnOnException {
+        if (v < voltage)
+            throw new ComputerTurnOnException(getClass().getSimpleName() + " can't be turn on " +
+                    "due to high voltage");
+        else {
+            isOn = true;
+            return getClass().getSimpleName() + " " + toString() + "has turned on";
+        }
     }
 
-    public String turnOff() {
-        return getClass().getSimpleName() + " " + toString() + "has turned off";
+    public String turnOff() throws ComputerTurnOffException {
+        if (!isOn)
+            throw new ComputerTurnOffException("The computer hasn't been turn on");
+        else {
+            isOn = false;
+            return getClass().getSimpleName() + " " + toString() + "has turned off";
+        }
     }
 
-    public String connect() {
-        return getClass().getSimpleName() + " " + toString() + "has connected to internet";
+    public String connect(boolean wifi) throws ComputerConnectionError {
+        if (!isOn)
+            throw new ComputerConnectionError("The computer hasn't been turn on");
+        else if (!wifi)
+            throw new ComputerConnectionError("There is no nets around to connect with");
+        else
+            return getClass().getSimpleName() + " " + toString() + "has connected to internet";
     }
 
     public String toString() {
@@ -82,12 +102,12 @@ abstract class DesktopComputer extends ComputerImpl { //Шаблон насто�
 }
 
 
-
 ///
 class Tablet extends PortableComputer {
 
     public Tablet(String maker, String model, CPU cpu, RAM ram, HDD hdd) {
         super(maker, model, cpu, ram, hdd);
+        voltage = 10;
     }
 }
 
@@ -100,6 +120,7 @@ class Notebook extends PortableComputer {
         super(maker, model, cpu, ram, hdd);
         this.display = display;
         this.keyboard = keyboard;
+        voltage = 20;
     }
 }
 
@@ -112,6 +133,7 @@ class Netbook extends PortableComputer {
         super(maker, model, cpu, ram, hdd);
         this.display = display;
         this.keyboard = keyboard;
+        voltage = 5;
     }
 }
 
@@ -122,6 +144,7 @@ class PersonalComputer extends DesktopComputer {
     public PersonalComputer(String maker, String model, CPU cpu, RAM ram, HDD hdd, GraphicsCard graphicsCard) {
         super(maker, model, cpu, ram, hdd);
         this.graphicsCard = graphicsCard;
+        voltage = 220;
     }
 }
 
@@ -129,6 +152,7 @@ class Nettop extends DesktopComputer {
 
     public Nettop(String maker, String model, CPU cpu, RAM ram, HDD hdd) {
         super(maker, model, cpu, ram, hdd);
+        voltage = 12;
     }
 }
 
@@ -139,6 +163,7 @@ class Monoblock extends DesktopComputer {
     public Monoblock(String maker, String model, CPU cpu, RAM ram, HDD hdd, Display display) {
         super(maker, model, cpu, ram, hdd);
         this.display = display;
+        voltage = 220;
     }
 }
 
@@ -146,7 +171,6 @@ class Server extends ComputerImpl {
 
     public Server(String maker, String model, CPU cpu, RAM ram, HDD hdd) {
         super(maker, model, cpu, ram, hdd);
+        voltage = 380;
     }
 }
-
-//"производителя " + maker + ", модели " + model + ", процессором " + CPU + ", оперативной памятью " + RAM + " и жестким диском " + HDD + " "
