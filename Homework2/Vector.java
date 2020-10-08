@@ -1,16 +1,50 @@
 package Homework2;
 
+import java.io.Serializable;
 import java.util.Scanner;
+/** @author Kohhannya
+ * @version 3.0
+ */
+public class Vector implements Serializable {
 
-public class Vector {
+    /** fields, which store coordinates of the vector */
     private double x, y, z;
 
+    /**
+     * This is constructor
+     * @param inputX - x
+     * @param inputY - y
+     * @param inputZ - z
+     * @since 1.0
+     */
     public Vector(double inputX, double inputY, double inputZ) {
         x = inputX;
         y = inputY;
         z = inputZ;
     }
 
+    /** Функция получения значения поля {@link Vector#x}
+     * @return возвращает координату по оси X
+     */
+    public double getX() {
+        return x;
+    }
+
+    /** Функция получения значения поля {@link Vector#y}
+     * @return возвращает координату по оси Y
+     */
+    public double getY() {
+        return y;
+    }
+
+    /** Функция получения значения поля {@link Vector#z}
+     * @return возвращает координату по оси Z
+     */
+    public double getZ() {
+        return z;
+    }
+
+    /** Функция сравнения двух объектов типа Vector */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -19,6 +53,9 @@ public class Vector {
         return Math.abs(x - vector.x) < eps && Math.abs(y - vector.y) < eps && Math.abs(z - vector.z) < eps;
     }
 
+    /**
+     * @return возвращает хеш объекта
+     */
     public int hashCode() {
         int newX = (int) (x * 1000);
         int newY = (int) (y * 1000);
@@ -26,29 +63,31 @@ public class Vector {
 
         return newX * 10000 + newY * 100 + newZ; //Позволяет закодировать куб с ребром 100 без коллизий
     }
-    /*  На случай, я неправильно написала собственный хеш...
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y, z);
-    }
+    /**
+     * @return возращает вектор в виде строки
      */
-
     public String toString() {
         return "(" + x + ", " + y + ", " + z + ")" + "\r\n";
     }
 
-    // Длина вектора. Корень из суммы квадратов
+    /**
+     * @return возращает длину вектора
+     */
     public double length(){
         return Math.sqrt(x * x + y * y + z * z);
     }
 
-    // метод, вычисляющий скалярное произведение
+    /**
+     * @return возращает скалярное произведение векторов
+     */
     public double scalarProduct(Vector vector){
         return x * vector.x + y * vector.y + z * vector.z;
     }
 
-    // метод, вычисляющий векторное произведение
+    /**
+     * @return возращает векторное произведение векторов
+     */
     public Vector crossProduct(Vector vector){
         double newX = y * vector.z - z * vector.y;
         double newY = z * vector.x - x * vector.z;
@@ -56,17 +95,23 @@ public class Vector {
         return new Vector(newX, newY, newZ);
     }
 
-    // Косинус между двумя векторами
+    /**
+     * @return возращает косинус между двумя векторами
+     */
     public double cos(Vector vector){
         return this.scalarProduct(vector) / this.length() / vector.length();
     }
 
-    // Сумма двух векторов
+    /**
+     * @return возращает сумму двух векторов
+     */
     public Vector add(Vector vector){
         return new Vector(x + vector.x, y + vector.y, z + vector.z);
     }
 
-    // Разность двух веkторов
+    /**
+     * @return возращает разность двух векторов
+     */
     public Vector subtract(Vector vector){
         return new Vector(x - vector.x, y - vector.y, z - vector.z);
     }
