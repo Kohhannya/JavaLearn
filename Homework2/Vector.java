@@ -7,11 +7,17 @@ import java.util.Scanner;
  */
 public class Vector implements Serializable {
 
-    /** fields, which store coordinates of the vector */
+    /** поля, задающие кооридинаты вектора */
     private double x, y, z;
 
     /**
-     * This is constructor
+     * Конструктор по умолчанию
+     */
+    public Vector() {
+    }
+
+    /**
+     * Конструктор
      * @param inputX - x
      * @param inputY - y
      * @param inputZ - z
