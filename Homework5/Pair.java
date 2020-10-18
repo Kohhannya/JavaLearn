@@ -1,5 +1,6 @@
 package Homework5;
 
+// Задача 1
 public class Pair<T, S> {
     private T first;
     private S second;
