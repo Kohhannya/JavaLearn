@@ -4,8 +4,8 @@ import Homework9.Visitor;
 
 public class Tablet extends PortableComputer {
 
-    public Tablet(String maker, String model, CPU cpu, RAM ram, HDD hdd) {
-        super(maker, model, cpu, ram, hdd);
+    public Tablet(String maker, String model, CPU cpu, RAM ram, HDD hdd, Display display) {
+        super(maker, model, cpu, ram, hdd, display);
     }
 
     @Override

@@ -1,32 +1,37 @@
 package Homework2;
 
+import Homework9.Visitor;
+import Homework9.XMLExportVisitor;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XmlVisitor;
+
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner io = new Scanner(System.in);
 
-        Vector a = new Vector(io.nextDouble(), io.nextDouble(), io.nextDouble());
-        Vector b = new Vector(io.nextDouble(), io.nextDouble(), io.nextDouble());
-
-        System.out.println("Задача 1: Класс вектор\r\n");
-        System.out.println("Длина а = " + a.length());
-        System.out.println("Длина b = " + b.length());
-
-        System.out.println("(a, b) = " + a.scalarProduct(b));
-
-        System.out.println("a x b = " + a.crossProduct(b).toString());
-
-        System.out.println("cos угла между a и b = " + a.cos(b));
-
-        System.out.println("a + b = " + a.add(b).toString());
-
-        System.out.println("a - b = " + a.subtract(b).toString());
-
-        System.out.println("Хеш а: " + a.hashCode());
-        System.out.println("Хеш b: " + b.hashCode());
-
-        System.out.println("Результат equals: " + a.equals(b));
+//        Vector a = new Vector(io.nextDouble(), io.nextDouble(), io.nextDouble());
+//        Vector b = new Vector(io.nextDouble(), io.nextDouble(), io.nextDouble());
+//
+//        System.out.println("Задача 1: Класс вектор\r\n");
+//        System.out.println("Длина а = " + a.length());
+//        System.out.println("Длина b = " + b.length());
+//
+//        System.out.println("(a, b) = " + a.scalarProduct(b));
+//
+//        System.out.println("a x b = " + a.crossProduct(b).toString());
+//
+//        System.out.println("cos угла между a и b = " + a.cos(b));
+//
+//        System.out.println("a + b = " + a.add(b).toString());
+//
+//        System.out.println("a - b = " + a.subtract(b).toString());
+//
+//        System.out.println("Хеш а: " + a.hashCode());
+//        System.out.println("Хеш b: " + b.hashCode());
+//
+//        System.out.println("Результат equals: " + a.equals(b));
 
         ///
         System.out.println("\r\n///////////////////////\r\nЗадача 2: Иерархия классов компьютеров\r\n");
@@ -56,12 +61,27 @@ public class Main {
         computers[1] = new PersonalComputer("ACER", "Aspire TC-886", cpus[1], rams[1], hdds[1], pkGraghicsCard); //пример настольного
         computers[2] = new Server("IBM", "System x3650 M3", cpus[2], rams[2], hdds[2]); //вне типов
 
-        for (Computer computer : computers) {
-            System.out.println(computer.turnOn() + "\r\n");
-            System.out.println(computer.connect() + "\r\n");
-            System.out.println(computer.turnOff() + "\r\n");
-        }
+//        for (Computer computer : computers) {
+//            System.out.println(computer.turnOn() + "\r\n");
+//            System.out.println(computer.connect() + "\r\n");
+//            System.out.println(computer.turnOff() + "\r\n");
+//        }
 
+        XMLExportVisitor visitor = new XMLExportVisitor();
+        FileWriter output;
+        try {
+            for (Computer computer : computers) {
+                output = new FileWriter(computer.getClass().getName().substring(10) + ".xml");
+                output.write(visitor.export(computer));
+                output.close();
+            }
+
+//            output = new FileWriter("out.xml");
+//            output.write(visitor.export(computers));
+//            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

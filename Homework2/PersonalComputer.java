@@ -11,6 +11,10 @@ public class PersonalComputer extends DesktopComputer {
         this.graphicsCard = graphicsCard;
     }
 
+    public GraphicsCard getGraphicsCard() {
+        return graphicsCard;
+    }
+
     @Override
     public String accept(Visitor v) {
         return v.visitPersonalComputer(this);

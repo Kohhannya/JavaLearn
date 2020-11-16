@@ -79,8 +79,15 @@ abstract class ComputerImpl implements Computer {
 
 abstract class PortableComputer extends ComputerImpl { //Шаблон портативного компьютера
 
-    public PortableComputer(String maker, String model, CPU cpu, RAM ram, HDD hdd) {
+    private Display display;
+
+    public PortableComputer(String maker, String model, CPU cpu, RAM ram, HDD hdd, Display display) {
         super(maker, model, cpu, ram, hdd);
+        this.display = display;
+    }
+
+    public Display getDisplay() {
+        return display;
     }
 
     public String toString() {

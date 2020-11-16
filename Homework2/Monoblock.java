@@ -11,6 +11,10 @@ public class Monoblock extends DesktopComputer {
         this.display = display;
     }
 
+    public Display getDisplay() {
+        return display;
+    }
+
     @Override
     public String accept(Visitor v) {
         return v.visitMonoblock(this);
