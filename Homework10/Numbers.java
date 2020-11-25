@@ -10,30 +10,36 @@ public class Numbers {
         String name1 = scanner.nextLine(), name2 = scanner.nextLine();
 
         findNumbers(name1, name2);
+        scanner.close();
     }
 
     public static void findNumbers(String input, String output) {
-        BufferedReader breader;
+        Scanner reader;
         FileWriter writer;
-        String s[];
-        boolean num;
+        String s;
+//        boolean num;
 
         try {
-            breader = new BufferedReader(new FileReader(input));
+            reader = new Scanner(new FileReader(input));
             writer = new FileWriter(output);
 
-            s = breader.readLine().split(" ");
-            for (int i = 0; i < s.length; i++) {
-                num = true;
-                for (int j = 0; j < s[i].length(); j++) {
-                    if (!(48 <= s[i].charAt(j) && s[i].charAt(j) <= 57)) {
-                        num = false;
-                        break;
-                    }
+            while (reader.hasNext()) {
+                s = reader.next();
+                try {
+                    writer.write(Integer.parseInt(s) + " ");
+                } catch (NumberFormatException e) {
+                    continue; //Так делать не очень хорошо, но зато довольно красиво)
                 }
-                if (num) writer.write(s[i] + " ");
+//                num = true;
+//                for (int j = 0; j < s.length(); j++) {
+//                    if (!(48 <= s.charAt(j) && s.charAt(j) <= 57)) {
+//                        num = false;
+//                        break;
+//                    }
+//                }
+//                if (num) writer.write(s + " ");
             }
-            breader.close();
+            reader.close();
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

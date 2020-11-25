@@ -25,4 +25,3 @@ public class EnglishLetters {
         }
     }
 }
-//C:\\Users\\Люба\\IdeaProjects\\Homeworks\\src\\Homework10\\input.txt
