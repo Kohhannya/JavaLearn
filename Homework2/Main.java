@@ -70,15 +70,15 @@ public class Main {
         XMLExportVisitor visitor = new XMLExportVisitor();
         FileWriter output;
         try {
-            for (Computer computer : computers) {
-                output = new FileWriter(computer.getClass().getName().substring(10) + ".xml");
-                output.write(visitor.export(computer));
-                output.close();
-            }
+//            for (Computer computer : computers) {
+//                output = new FileWriter(computer.getClass().getName().substring(10) + ".xml");
+//                output.write(visitor.export(computer));
+//                output.close();
+//            }
 
-//            output = new FileWriter("out.xml");
-//            output.write(visitor.export(computers));
-//            output.close();
+            output = new FileWriter("out.xml");
+            output.write(visitor.export(computers));
+            output.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
