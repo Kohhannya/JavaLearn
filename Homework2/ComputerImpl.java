@@ -31,7 +31,7 @@ abstract public class ComputerImpl implements Computer, Comparable<ComputerImpl>
                     "due to high voltage");
         else {
             isOn = true;
-            return getClass().getSimpleName() + " " + toString() + "has turned on";
+            return toString() + "has turned on";
         }
     }
 
@@ -40,7 +40,7 @@ abstract public class ComputerImpl implements Computer, Comparable<ComputerImpl>
             throw new ComputerTurnOffException("The computer hasn't been turn on");
         else {
             isOn = false;
-            return getClass().getSimpleName() + " " + toString() + "has turned off";
+            return toString() + "has turned off";
         }
     }
 
@@ -50,7 +50,7 @@ abstract public class ComputerImpl implements Computer, Comparable<ComputerImpl>
         else if (!wifi)
             throw new ComputerConnectionError("There is no nets around to connect with");
         else
-            return getClass().getSimpleName() + " " + toString() + "has connected to internet";
+            return toString() + "has connected to internet";
     }
 
     public String toString() {

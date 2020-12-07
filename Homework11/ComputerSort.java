@@ -9,7 +9,7 @@ public class ComputerSort {
     public static void main(String[] args) {
         Computer[] array = Main.testInit();
 
-        System.out.println("До сортировки:");
+        System.out.println("До сортировки:\n------------");
         for (int i = 0; i < 3; i++) {
             System.out.println(array[i]);
         }
@@ -19,7 +19,7 @@ public class ComputerSort {
             tree.add((ComputerImpl)array[i]);
         }
 
-        System.out.println("\nПосле сортировки:");
+        System.out.println("\nПосле сортировки:\n------------");
         for (ComputerImpl computer : tree) {
             System.out.println(computer);
         }
