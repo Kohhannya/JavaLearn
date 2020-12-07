@@ -8,7 +8,11 @@ abstract public class PortableComputer extends ComputerImpl { //Шаблон п�
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName() + " ");
         sb.append("(Portable Computer):\r\n");
+        //sb.append("\r\n");
+        sb.append("Maker: " + maker + "\r\n");
+        sb.append("Model: " + model + "\r\n");
         for (Component component : components) {
             sb.append(component.printComponent() + "\r\n");
         }

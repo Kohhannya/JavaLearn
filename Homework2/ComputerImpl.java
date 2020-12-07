@@ -55,7 +55,10 @@ abstract public class ComputerImpl implements Computer, Comparable<ComputerImpl>
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\r\n");
+        //sb.append("\r\n");
+        sb.append(getClass().getSimpleName() + ":\r\n");
+        sb.append("Maker: " + maker + "\r\n");
+        sb.append("Model: " + model + "\r\n");
         for (Component component : components) {
             sb.append(component.printComponent() + "\r\n");
         }
