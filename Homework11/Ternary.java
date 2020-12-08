@@ -32,8 +32,8 @@ public class Ternary<T, R> implements Function<T, R> {
 
         Ternary<Integer, String> ternary = new Ternary<>(isPositive, ifPositive, ifNotPositive);
 
-        System.out.println(ternary.apply(41));
-        System.out.println(ternary.apply(-112));
-        System.out.println(ternary.apply(0));
+        System.out.println(ternary.apply(io.nextInt()));
+        System.out.println(ternary.apply(io.nextInt()));
+        System.out.println(ternary.apply(io.nextInt()));
     }
 }
